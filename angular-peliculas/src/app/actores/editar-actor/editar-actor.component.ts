@@ -1,15 +1,21 @@
 import { Component, Input, numberAttribute } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { ActorCreacionDTO, ActorDTO } from '../actores';
+import { FormularioActoresComponent } from '../formulario-actores/formulario-actores.component';
 
 @Component({
   selector: 'app-editar-actor',
   standalone: true,
-  imports: [RouterLink, MatButtonModule],
+  imports: [FormularioActoresComponent],
   templateUrl: './editar-actor.component.html',
   styleUrl: './editar-actor.component.css'
 })
 export class EditarActorComponent {
   @Input({transform: numberAttribute})
   id!: number;
+
+  actor: ActorDTO = {id: 1 , nombre: 'Tom Holland', fechaNacimiento: new Date('1996-01-25'), foto: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tom_Holland_by_Gage_Skidmore.jpg/1200px-Tom_Holland_by_Gage_Skidmore.jpg'}
+
+  guardarCambios(actor: ActorCreacionDTO){
+    console.log('Editando el actor', actor)
+  }
 }

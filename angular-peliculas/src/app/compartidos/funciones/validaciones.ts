@@ -19,3 +19,20 @@ export function primeraLetraMayuscula(): ValidatorFn {
     return null; // Si la validación pasa, no hay error
   }
 }
+
+export function fechaNoPuedeSerFutura(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const fechaEscogidaPorElUsuario = new Date(control.value);
+    const hoy = new Date();
+
+    if (fechaEscogidaPorElUsuario > hoy){
+      return {
+        futuro: {
+          mensaje: 'La fecha no púede ser del futuro'
+        }
+      }
+    }
+
+    return null;
+  }
+}
