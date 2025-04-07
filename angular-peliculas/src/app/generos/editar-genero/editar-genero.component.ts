@@ -6,7 +6,7 @@ import { GeneroCreacionDTO, GeneroDTO } from '../generos';
 
 @Component({
   selector: 'app-editar-genero',
-  imports: [RouterLink, MatButtonModule, FormularioGeneroComponent],
+  imports: [MatButtonModule, FormularioGeneroComponent],
   templateUrl: './editar-genero.component.html',
   styleUrl: './editar-genero.component.css'
 })

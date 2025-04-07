@@ -1,20 +1,22 @@
 <mat-toolbar>
   <span>
     <a routerLink="" mat-button>
-      <mat-icon>local_movies</mat-icon> Angular Peliculas
+      <mat-icon>local_movies</mat-icon> Angular Películas
     </a>
   </span>
 
   <div>
-    <a mat-button routerLink="/generos">Géneros</a>
+    <a mat-button routerLink="peliculas/filtrar">
+      <mat-icon>search</mat-icon>
+      Buscar Películas</a>
   </div>
   <div>    
-    <a mat-button routerLink="/actores">Actores</a>
+    <a mat-button routerLink="actores">Actores</a>
   </div>
   <div>
-    <a mat-button routerLink="/cines">Cines</a>
+    <a mat-button routerLink="cines">Cines</a>
   </div>
   <div>
-    <a mat-button routerLink="/peliculas/crear">Crear Pelicula</a>
+    <a mat-button routerLink="peliculas/crear">Crear Pelicula</a>
   </div>
 </mat-toolbar>

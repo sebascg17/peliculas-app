@@ -7,7 +7,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ListadoPeliculasComponent, MenuComponent, MatButtonModule, RouterOutlet],
+  imports: [MenuComponent, MatButtonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

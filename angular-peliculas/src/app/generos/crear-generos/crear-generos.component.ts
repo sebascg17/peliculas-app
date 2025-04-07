@@ -10,7 +10,7 @@ import { GeneroCreacionDTO } from '../generos';
 
 @Component({
   selector: 'app-crear-generos',
-  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterLink, FormularioGeneroComponent],
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, FormularioGeneroComponent],
   templateUrl: './crear-generos.component.html',
   styleUrl: './crear-generos.component.css'
 })

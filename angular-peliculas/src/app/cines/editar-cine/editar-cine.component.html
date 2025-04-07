@@ -1,1 +1,4 @@
-<p>El id del cine a editar es: {{id}}</p>
+<h2>Editar Cine</h2>
+
+<app-formulario-cines (posteoFormulario)="guardarCambios($event)" [modelo]="cine"></app-formulario-cines>
+<!-- Compare this snippet from angular-peliculas/src/app/cines/editar-cine/editar-cine.component.ts: -->
