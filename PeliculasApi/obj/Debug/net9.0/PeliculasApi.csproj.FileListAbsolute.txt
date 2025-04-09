@@ -35,3 +35,4 @@ C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\Peli
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\obj\Debug\net9.0\PeliculasApi.pdb
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\obj\Debug\net9.0\PeliculasApi.genruntimeconfig.cache
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\obj\Debug\net9.0\ref\PeliculasApi.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

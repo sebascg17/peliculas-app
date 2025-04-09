@@ -20,6 +20,19 @@
   </mat-form-field>
 
   <app-input-img titulo="Poster de la Pelicula" [urlImagenActual]="modelo?.poster" (archivoSeleccionado)="archivoSeleccionado($event)"></app-input-img>
+
+  <h4>Seleccione los Géneros</h4>
+
+  <app-selector-multiple [Seleccionados]="generosSeleccionados" [NoSeleccionados]="generosNoSeleccionados"></app-selector-multiple>
+
+  <h4>Seleccione los Cines</h4>
+
+  <app-selector-multiple [Seleccionados]="cinesSeleccionados" [NoSeleccionados]="cinesNoSeleccionados"></app-selector-multiple>
+
+  <h4>Seleccione los Actores</h4>
+
+  <app-autocomplete-actores [actoresSeleccionados]="actoresSeleccionados"></app-autocomplete-actores>
+
   <div class="contenedor-botones">
     <button type="submit" mat-flat-button [disabled]="form.invalid">Guardar Cambios</button>
     <a mat-stroked-button routerLink="/">Cancelar</a>

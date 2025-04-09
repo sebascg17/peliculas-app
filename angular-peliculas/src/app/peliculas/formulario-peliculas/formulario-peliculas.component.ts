@@ -8,10 +8,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { InputImgComponent } from '../../compartidos/componentes/input-img/input-img.component';
 import { PeliculaCreacionDTO, PeliculaDTO } from '../peliculas';
 import moment from 'moment';
+import { SelectorMultipleDTO } from '../../compartidos/componentes/selector-multiple/SelectorMultipleModelo';
+import { SelectorMultipleComponent } from "../../compartidos/componentes/selector-multiple/selector-multiple.component";
+import { AutocompleteActoresComponent } from "../../actores/autocomplete-actores/autocomplete-actores.component";
+import { ActorAutoCompleteDTO } from '../../actores/actores';
 
 @Component({
   selector: 'app-formulario-peliculas',
-  imports: [MatFormFieldModule, ReactiveFormsModule, MatButtonModule, MatInputModule, InputImgComponent, RouterLink, MatDatepickerModule],
+  imports: [MatFormFieldModule, ReactiveFormsModule, MatButtonModule, MatInputModule, InputImgComponent, RouterLink, MatDatepickerModule, SelectorMultipleComponent, AutocompleteActoresComponent],
   templateUrl: './formulario-peliculas.component.html',
   styleUrl: './formulario-peliculas.component.css'
 })
@@ -21,6 +25,22 @@ export class FormularioPeliculasComponent implements OnInit{
       this.form.patchValue(this.modelo);
     }
   }
+
+  @Input({required: true})
+  generosNoSeleccionados!: SelectorMultipleDTO[];
+  
+  @Input({required: true})
+  generosSeleccionados!: SelectorMultipleDTO[];
+
+  @Input({required: true})
+  cinesNoSeleccionados!: SelectorMultipleDTO[];
+  
+  @Input({required: true})
+  cinesSeleccionados!: SelectorMultipleDTO[];
+  
+  @Input({required: true})
+  actoresSeleccionados!: ActorAutoCompleteDTO[];
+
   @Input()
   modelo?: PeliculaDTO;
 
@@ -47,6 +67,14 @@ export class FormularioPeliculasComponent implements OnInit{
     const pelicula = this.form.value as PeliculaCreacionDTO;
 
     pelicula.fechaLanzamiento = moment(pelicula.fechaLanzamiento).toDate();
+
+    const generosIds = this.generosSeleccionados.map(val => val.llave);
+    pelicula.generosIds = generosIds;
+
+    const cinesIds = this.cinesSeleccionados.map(val => val.llave);
+    pelicula.cinesIds = cinesIds;
+
+    pelicula.actores = this.actoresSeleccionados;
 
     this.posteoFormulario.emit(pelicula);
   }
