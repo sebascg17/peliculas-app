@@ -2,7 +2,7 @@
 
 namespace PeliculasApi
 {
-    public class RepositorioEnMemoria
+    public class RepositorioEnMemoria: IRepositorio
     {
         private List<Genero> _generos;
 
@@ -20,10 +20,20 @@ namespace PeliculasApi
             return _generos;
         }
 
+        public void Crear (Genero genero)
+        {
+            _generos.Add(genero);
+        }
+
         public async Task<Genero?> ObtenerPorId(int id )
         {
             await Task.Delay(TimeSpan.FromSeconds(3));
             return _generos.FirstOrDefault (g  => g.Id == id);
+        }
+
+        public bool Existe(string nombre )
+        {
+            return _generos.Any (g => g.Nombre == nombre);
         }
 
         //private async Task LoguearEnConsola ()
