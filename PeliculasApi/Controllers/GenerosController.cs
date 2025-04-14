@@ -1,6 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
+using Microsoft.EntityFrameworkCore;
+using PeliculasApi.DTOs;
 using PeliculasApi.Entidades;
+using PeliculasApi.Utilidades;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace PeliculasApi.Controllers
 {
@@ -8,107 +15,91 @@ namespace PeliculasApi.Controllers
     [ApiController]
     public class GenerosController: ControllerBase
     {
-        private readonly IRepositorio repositorio;
-        private readonly ServicioTransient transient1;
-        private readonly ServicioTransient transient2;
-        private readonly ServicioScoped scoped1;
-        private readonly ServicioScoped scoped2;
-        private readonly ServicioSingleton singleton;
         private readonly IOutputCacheStore outputCacheStore;
-        private readonly IConfiguration configuration;
+        private readonly ApplicationDbContext context;
+        private readonly IMapper mapper;
         private const string cacheTag = "generos";
 
-        public GenerosController (IRepositorio repositorio, 
-            ServicioTransient transient1,
-            ServicioTransient transient2,
-            ServicioScoped scoped1,
-            ServicioScoped scoped2,
-            ServicioSingleton singleton, IOutputCacheStore outputCacheStore,
-            IConfiguration configuration
-            )
-        {
-            this.repositorio = repositorio;
-            this.transient1 = transient1;
-            this.transient2 = transient2;
-            this.scoped1 = scoped1;
-            this.scoped2 = scoped2;
-            this.singleton = singleton;
+        public GenerosController (IOutputCacheStore outputCacheStore, ApplicationDbContext context,
+            IMapper mapper)
+        {            
             this.outputCacheStore = outputCacheStore;
-            this.configuration = configuration;
+            this.context = context;
+            this.mapper = mapper;
         }
+               
 
-        [HttpGet("ejemplo-proveedor-configuracion")]
-        public string GetEjemploProveedorConfiguracion ()
-        {
-            return configuration.GetValue<string>("CadenaDeConexion")!;
-        }
-
-        [HttpGet("servicios-tiempo-de-vida")]
-        public IActionResult GetServiciosTiemposDeVida ()
-        {
-            return Ok(new
-            {
-                Transients = new { transient1 = transient1.ObtenerId, transient2 = transient2.ObtenerId },
-                Scopeds = new { scoped1 = scoped1.ObtenerId, scoped2 = scoped2.ObtenerId },
-                Singletons = singleton.ObtenerId
-            });
-        }
-
+       
         [HttpGet] // api/generos
-        [HttpGet("listado")] // api/generos/listado
-        [HttpGet("/listado-generos")] // listado-generos
         [OutputCache(Tags = [cacheTag])]
-        public List<Genero> Get ()
+        public async Task<List<GeneroDTO>> Get ([FromQuery] PaginacionDTO paginacion)
         {
-            var generos = repositorio.ObtenerTodosLosGeneros();
-            return generos;
+            var queryable = context.Generos;
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+            return await queryable
+                .OrderBy(g => g.Nombre)
+                .Paginar(paginacion)
+                .ProjectTo<GeneroDTO>(mapper.ConfigurationProvider).ToListAsync(); ;
         }
 
-        [HttpGet("{id:int}")] // api/genero/1
+        [HttpGet("{id:int}", Name = "ObtenerGeneroPorId")] // api/genero/1
         [OutputCache(Tags = [cacheTag])]
-        public async Task<ActionResult<Genero>> Get (int id )
+        public async Task<ActionResult<GeneroDTO>> Get ( int id )
         {
-            var genero = await repositorio.ObtenerPorId(id);
-            if ( genero == null )
+            var genero = await context.Generos
+                .ProjectTo<GeneroDTO>(mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(g => g.Id == id);
+
+            if (genero == null)
             {
                 return NotFound();
             }
-            return genero;
-        }
 
-        [HttpGet("{nombre}")] //api/generos/Sebas
-        public async Task<Genero?> Get ( string nombre )
-        {
-            var genero = await repositorio.ObtenerPorId(1);
             return genero;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post ([FromBody] Genero genero)
+        public async Task<IActionResult> Post ([FromBody] GeneroCreacionDTO generoCreacionDTO)
         {
-            var yaExisteUnGeneroConDichoNombre = repositorio.Existe(genero.Nombre);
+            var genero = mapper.Map<Genero>(generoCreacionDTO);
+            context.Add(genero);
+            await context.SaveChangesAsync ();
+            await outputCacheStore.EvictByTagAsync(cacheTag, default);
+            return CreatedAtRoute("ObtenerGeneroPorId", new { id = genero.Id }, genero);
+        }
 
-            if (yaExisteUnGeneroConDichoNombre)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Put (int id, [FromBody] GeneroCreacionDTO generoCreacionDTO)
+        {
+            var generoExiste = await context.Generos.AnyAsync(g => g.Id == id);
+
+            if (!generoExiste)
             {
-                return BadRequest($"Ya existe un género con el nombre {genero.Nombre}");
+                return NotFound();
             }
 
-            repositorio.Crear(genero);
+            var genero = mapper.Map<Genero> (generoCreacionDTO);
+            genero.Id = id;
+
+            context.Update(genero);
+            await context.SaveChangesAsync();
             await outputCacheStore.EvictByTagAsync(cacheTag, default);
 
-            return Ok();
+            return NoContent();
         }
 
-        [HttpPut]
-        public void Put () 
-        { 
-        
-        }
-
-        [HttpDelete]
-        public void Delete ()
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete (int id)
         {
+            var registrosBorrados = await context.Generos.Where(g => g.Id == id).ExecuteDeleteAsync();
 
+            if (registrosBorrados == 0)
+            {
+                return NotFound();
+            }
+
+            await outputCacheStore.EvictByTagAsync (cacheTag, default);
+            return NoContent();
         }
     }
 }
