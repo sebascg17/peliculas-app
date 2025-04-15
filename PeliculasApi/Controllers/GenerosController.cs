@@ -98,7 +98,7 @@ namespace PeliculasApi.Controllers
                 return NotFound();
             }
 
-            await outputCacheStore.EvictByTagAsync (cacheTag, default);
+            await outputCacheStore.EvictByTagAsync (cacheTag, default) ;
             return NoContent();
         }
     }
