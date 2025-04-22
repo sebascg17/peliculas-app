@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PeliculasApi;
+using PeliculasApi.Servicios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer("name=DefaultConnection"));
+builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosAzure>();
+//builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddOutputCache(opciones =>
 {
@@ -38,6 +42,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseCors();
 

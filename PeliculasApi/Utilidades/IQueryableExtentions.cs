@@ -2,7 +2,7 @@
 
 namespace PeliculasApi.Utilidades
 {
-    public static class IQuetyableExtentions
+    public static class IQueryableExtentions
     {
         public static IQueryable<T> Paginar<T>( this IQueryable<T> queryable, PaginacionDTO paginacion )
         {

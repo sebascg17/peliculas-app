@@ -1,12 +1,228 @@
 {
   "Version": 1,
-  "Hash": "nHKb+iXLHlnv8jEsvOm0bepsLsWVk595kz8QbXfwbI0=",
+  "Hash": "0TFxuspZWbtw+b0tvbEBcJoNm4+78A7XJONwLCoYaZ8=",
   "Source": "PeliculasApi",
   "BasePath": "_content/PeliculasApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "PeliculasApi\\wwwroot",
+      "Source": "PeliculasApi",
+      "ContentRoot": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\",
+      "BasePath": "_content/PeliculasApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\actores\\288d2bb4-89fb-4a97-9db7-42d4704e6a17.jpg",
+      "SourceId": "PeliculasApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\",
+      "BasePath": "_content/PeliculasApi",
+      "RelativePath": "actores/288d2bb4-89fb-4a97-9db7-42d4704e6a17#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "apgxf0a5kl",
+      "Integrity": "Mt7R/uLipgC3Sq3owJET9GEtHXgmo6ouqGUX4DEXPv8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\actores\\288d2bb4-89fb-4a97-9db7-42d4704e6a17.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\actores\\e58235b7-4af8-4bef-a60f-3a96548f189b.avif",
+      "SourceId": "PeliculasApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\",
+      "BasePath": "_content/PeliculasApi",
+      "RelativePath": "actores/e58235b7-4af8-4bef-a60f-3a96548f189b#[.{fingerprint}]?.avif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jemg3iegcz",
+      "Integrity": "ayAnSayVZNNUldRv3sbr0pKTGXzCIOB0IH7NqPNuAyk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\actores\\e58235b7-4af8-4bef-a60f-3a96548f189b.avif"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "actores/288d2bb4-89fb-4a97-9db7-42d4704e6a17.apgxf0a5kl.jpg",
+      "AssetFile": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\actores\\288d2bb4-89fb-4a97-9db7-42d4704e6a17.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24157"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Mt7R/uLipgC3Sq3owJET9GEtHXgmo6ouqGUX4DEXPv8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 16 Apr 2025 22:42:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "apgxf0a5kl"
+        },
+        {
+          "Name": "label",
+          "Value": "actores/288d2bb4-89fb-4a97-9db7-42d4704e6a17.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Mt7R/uLipgC3Sq3owJET9GEtHXgmo6ouqGUX4DEXPv8="
+        }
+      ]
+    },
+    {
+      "Route": "actores/288d2bb4-89fb-4a97-9db7-42d4704e6a17.jpg",
+      "AssetFile": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\actores\\288d2bb4-89fb-4a97-9db7-42d4704e6a17.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24157"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Mt7R/uLipgC3Sq3owJET9GEtHXgmo6ouqGUX4DEXPv8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 16 Apr 2025 22:42:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Mt7R/uLipgC3Sq3owJET9GEtHXgmo6ouqGUX4DEXPv8="
+        }
+      ]
+    },
+    {
+      "Route": "actores/e58235b7-4af8-4bef-a60f-3a96548f189b.avif",
+      "AssetFile": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\actores\\e58235b7-4af8-4bef-a60f-3a96548f189b.avif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "90090"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ayAnSayVZNNUldRv3sbr0pKTGXzCIOB0IH7NqPNuAyk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 17 Apr 2025 02:02:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ayAnSayVZNNUldRv3sbr0pKTGXzCIOB0IH7NqPNuAyk="
+        }
+      ]
+    },
+    {
+      "Route": "actores/e58235b7-4af8-4bef-a60f-3a96548f189b.jemg3iegcz.avif",
+      "AssetFile": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\DEV\\CURSO .NET + ANGULAR\\curso-angular\\PeliculasApi\\wwwroot\\actores\\e58235b7-4af8-4bef-a60f-3a96548f189b.avif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "90090"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ayAnSayVZNNUldRv3sbr0pKTGXzCIOB0IH7NqPNuAyk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 17 Apr 2025 02:02:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jemg3iegcz"
+        },
+        {
+          "Name": "label",
+          "Value": "actores/e58235b7-4af8-4bef-a60f-3a96548f189b.avif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ayAnSayVZNNUldRv3sbr0pKTGXzCIOB0IH7NqPNuAyk="
+        }
+      ]
+    }
+  ]
 }
