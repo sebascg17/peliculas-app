@@ -173,3 +173,7 @@ C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\Peli
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\Azure.Storage.Common.dll
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\System.IO.Hashing.dll
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\PeliculasApi.staticwebassets.runtime.json
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\NetTopologySuite.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\NetTopologySuite.IO.SqlServerBytes.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\obj\Debug\net9.0\EFCoreSqlServerNetTopologySuite.cs

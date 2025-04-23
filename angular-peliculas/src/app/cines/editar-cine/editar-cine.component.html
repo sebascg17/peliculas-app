@@ -1,4 +1,1 @@
-<h2>Editar Cine</h2>
-
-<app-formulario-cines (posteoFormulario)="guardarCambios($event)" [modelo]="cine"></app-formulario-cines>
-<!-- Compare this snippet from angular-peliculas/src/app/cines/editar-cine/editar-cine.component.ts: -->
+<app-editar-entidad [formulario]="formularioCines" rutaIndice="/cines" [id]="id" titulo="Editar Cine"></app-editar-entidad>
