@@ -8,7 +8,7 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de Lanzamiento</mat-label>
-    <input matInput [matDatepicker]="picker" [formControl]="form.controls.fechaLanzamiento" />
+    <input matInput [matDatepicker]="picker" [formControl]="form.controls.fechaLanzamiento"/>
     <mat-datepicker #picker></mat-datepicker>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-error>{{obtenerErrorCampoFechaLanzamiento()}}</mat-error>
@@ -19,19 +19,49 @@
     <input matInput [formControl]="form.controls.trailer" />
   </mat-form-field>
 
-  <app-input-img titulo="Poster de la Pelicula" [urlImagenActual]="modelo?.poster" (archivoSeleccionado)="archivoSeleccionado($event)"></app-input-img>
+  <app-input-img 
+    *ngIf="modelo"
+    titulo="Poster de la Pelicula" 
+    [urlImagenActual]="modelo.poster" 
+    (archivoSeleccionado)="archivoSeleccionado($event)"
+    style="max-width: 200px; height: auto;">
+  </app-input-img>  
+  <mat-error *ngIf="form.controls.poster.touched && form.controls.poster.errors?.['required']">
+    El poster es obligatorio
+  </mat-error>
 
+  
+  <!-- (seleccionados)="actualizarGenerosSeleccionados($event)" -->
   <h4>Seleccione los Géneros</h4>
+  <app-selector-multiple 
+    [NoSeleccionados]="generosNoSeleccionados" 
+    [Seleccionados]="generosSeleccionados">
+  </app-selector-multiple>
+  <!-- <mat-error *ngIf="form.controls.generosIds.touched && form.controls.generosIds.errors?.['required']">
+    {{ obtenerErrorCampoGeneros() }}
+  </mat-error> -->
 
-  <app-selector-multiple [Seleccionados]="generosSeleccionados" [NoSeleccionados]="generosNoSeleccionados"></app-selector-multiple>
+  <h4 *ngIf="mostrarCines">Seleccione los Cines</h4>
 
-  <h4>Seleccione los Cines</h4>
+  @if (mostrarCines) {
+    <mat-error *ngIf="cineRequeridoError">
+      Debe seleccionar al menos un cine si la fecha ya ha pasado.
+    </mat-error>
+    <app-selector-multiple 
+      [Seleccionados]="cinesSeleccionados" 
+      [NoSeleccionados]="cinesNoSeleccionados">
+    </app-selector-multiple>
+  }
 
-  <app-selector-multiple [Seleccionados]="cinesSeleccionados" [NoSeleccionados]="cinesNoSeleccionados"></app-selector-multiple>
-
+  
+  <!-- (actoresSeleccionadosChange)="actualizarActoresSeleccionados($event)" -->
   <h4>Seleccione los Actores</h4>
-
-  <app-autocomplete-actores [actoresSeleccionados]="actoresSeleccionados"></app-autocomplete-actores>
+  <app-autocomplete-actores 
+    [actoresSeleccionados]="actoresSeleccionados">
+  </app-autocomplete-actores>
+  <!-- <mat-error *ngIf="form.controls.actores.touched && form.controls.actores.errors?.['required']">
+    {{ obtenerErrorCampoActores() }}
+  </mat-error> -->
 
   <div class="contenedor-botones">
     <button type="submit" mat-flat-button [disabled]="form.invalid">Guardar Cambios</button>

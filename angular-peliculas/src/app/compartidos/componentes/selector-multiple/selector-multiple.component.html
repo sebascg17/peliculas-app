@@ -5,8 +5,8 @@
     }
   </ul>
   <div class="div-botones">
-<button type="button" (click)="seleccionarTodo()">>></button>
-<button type="button" (click)="deseleccionarTodo()"><<</button>
+<button mat-flat-button type="button" (click)="seleccionarTodo()">Agregar Todos</button>
+<button mat-flat-button class="warn" type="button" (click)="deseleccionarTodo()">Quitar Todos</button>
   </div>
   <ul>
     @for (elemento of Seleccionados; track $index) {
