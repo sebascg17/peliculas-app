@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
@@ -18,6 +18,15 @@ export class PeliculasService {
     return this.http.get<LandingPageDTO>(`${this.urlBase}/landing`);    
   }
 
+  public obtenerPorId(id: number): Observable<PeliculaDTO> {
+    return this.http.get<PeliculaDTO>(`${this.urlBase}/${id}`);
+  }
+
+  public filtrar(valores: any): Observable<HttpResponse<PeliculaDTO[]>> {
+    const params = new HttpParams({fromObject: valores});
+    return this.http.get<PeliculaDTO[]>(`${this.urlBase}/filtrar`, { observe: 'response', params });
+  }
+
   public crearGet(): Observable<PeliculaPostGetDTO>{
     return this.http.get<PeliculaPostGetDTO>(`${this.urlBase}/postget`);
   }
@@ -34,6 +43,10 @@ export class PeliculasService {
   public actualizar(id: number, pelicula: PeliculaCreacionDTO){
     const formData = this.construirFormData(pelicula);
     return this.http.put(`${this.urlBase}/${id}`, formData)
+  }
+
+  public borrar(id: number){
+    return this.http.delete(`${this.urlBase}/${id}`);
   }
 
   private construirFormData(pelicula: PeliculaCreacionDTO) : FormData{
