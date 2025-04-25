@@ -24,17 +24,12 @@ import { primeraLetraMayuscula } from '../../compartidos/funciones/validaciones'
 export class FormularioPeliculasComponent implements OnInit {
   
   mostrarCines: boolean = true;
-  cineRequeridoError: boolean = false;  
-  private _modelo!: PeliculaDTO;
+  cineRequeridoError: boolean = false;
 
   ngOnInit(): void {
-    if (this.modelo !== undefined) {
-      this.form.patchValue({
-        titulo: this.modelo.titulo,
-        trailer: this.modelo.trailer,
-        fechaLanzamiento: moment(this.modelo.fechaLanzamiento).toDate(),
-        poster: this.modelo.poster // si es string (URL), tu input-img debe poder manejarlo
-      });
+
+    if (this.modelo !== undefined){
+      this.form.patchValue(this.modelo);
     }
   
     this.form.controls.fechaLanzamiento.valueChanges.subscribe(fecha => {
@@ -65,28 +60,18 @@ export class FormularioPeliculasComponent implements OnInit {
 
 
   @Input()
-  set modelo(value: PeliculaDTO) {
-    this._modelo = value;
-    this.form?.patchValue(value);
-  }
-
-  get modelo(): PeliculaDTO {
-    return this._modelo;
-  }
+  modelo?: PeliculaDTO;
 
   @Output()
   posteoFormulario = new EventEmitter<PeliculaCreacionDTO>();
 
   private formBuilder = inject(FormBuilder);
   form = this.formBuilder.group({
-    titulo: this.formBuilder.control<string>('', { validators: [Validators.required, primeraLetraMayuscula()] }),
-    fechaLanzamiento: this.formBuilder.control<Date | null>(null, { validators: [Validators.required] }),
-    trailer: this.formBuilder.control<string>('', []),
-    poster: this.formBuilder.control<File | string | null>(null, { validators: [Validators.required] })
-    // generosIds: this.formBuilder.control<number[]>([], Validators.required),
-    // // cinesIds: this.formBuilder.control<number[]>([], Validators.required),
-    // actores: this.formBuilder.control<ActorAutoCompleteDTO[]>([], Validators.required)
-  });
+    titulo: ['', {validators: [Validators.required]}],
+    fechaLanzamiento: new FormControl<Date | null>(null, {validators: [Validators.required]}),
+    trailer: '',
+    poster: new FormControl<File | string | null>(null)
+  })
 
   
   // actualizarGenerosSeleccionados(generos: SelectorMultipleDTO[]) {

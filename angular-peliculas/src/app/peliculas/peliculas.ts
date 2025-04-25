@@ -37,5 +37,4 @@ export interface PeliculasPutGetDTO{
   cinesSeleccionados: CineDTO[];
   cinesNoSeleccionados: CineDTO[];
   actores: ActorAutoCompleteDTO[];
-
 }

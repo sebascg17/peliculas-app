@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, Input, numberAttribute, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,34 +27,8 @@ import { ActorAutoCompleteDTO } from '../../actores/actores';
   styleUrl: './editar-pelicula.component.css'
 })
 export class EditarPeliculaComponent implements OnInit {
-  form!: FormGroup;
-  id!: number;
-  pelicula!: PeliculaDTO;
-
-  generosNoSeleccionados: SelectorMultipleDTO[] = [];
-  generosSeleccionados: SelectorMultipleDTO[] = [];
-
-  cinesNoSeleccionados: SelectorMultipleDTO[] = [];
-  cinesSeleccionados: SelectorMultipleDTO[] = [];
-
-  actoresSeleccionados: ActorAutoCompleteDTO[] = [];
-
-  mostrarCines = true;
-  cineRequeridoError = false;
-  errores: string[] = [];
-
-  constructor(
-    private peliculasService: PeliculasService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private fb: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
-    this.id = +this.activatedRoute.snapshot.params['id'];
-  
+  ngOnInit(): void {  
     this.peliculasService.actualizarGet(this.id).subscribe(modelo => {
-      console.log('Datos recibidos de la película:', modelo);
       this.pelicula = modelo.pelicula;
       this.actoresSeleccionados = modelo.actores;
   
@@ -72,37 +46,29 @@ export class EditarPeliculaComponent implements OnInit {
   
       this.generosSeleccionados = modelo.generosSeleccionados.map(genero => {
         return <SelectorMultipleDTO>{ llave: genero.id, valor: genero.nombre };
-      });
-  
-      // Creamos el formulario con valores iniciales
-      this.form = this.fb.group({
-        titulo: ['', Validators.required],
-        fechaLanzamiento: ['', Validators.required],
-        trailer: [''],
-        poster: ['', Validators.required],
-        generosIds: [[], Validators.required],
-        cinesIds: [[]],
-        actores: [[], Validators.required]
-      });
-  
-      // Usamos patchValue para actualizar los campos del formulario con los datos recibidos
-      this.form.patchValue({
-        titulo: this.pelicula.titulo,
-        fechaLanzamiento: this.pelicula.fechaLanzamiento,
-        trailer: this.pelicula.trailer,
-        poster: this.pelicula.poster,
-        generosIds: this.generosSeleccionados.map(x => x.llave),
-        cinesIds: this.cinesSeleccionados.map(x => x.llave),
-        actores: this.actoresSeleccionados
-      });
-  
-      console.log('Formulario actualizado:', this.form.value);
-    });
+      });  
+    }); 
   }
+
+  @Input({ transform: numberAttribute })
+  id!: number;
+
+  pelicula!: PeliculaDTO;
+  generosNoSeleccionados!: SelectorMultipleDTO[];
+  generosSeleccionados!: SelectorMultipleDTO[];
+  cinesNoSeleccionados!: SelectorMultipleDTO[];
+  cinesSeleccionados!: SelectorMultipleDTO[];
+  actoresSeleccionados!: ActorAutoCompleteDTO[];
+
+  peliculasService = inject(PeliculasService);
+  router = inject(Router);
+  errores: string[] = [];  
 
   guardarCambios(pelicula: PeliculaCreacionDTO): void {
     this.peliculasService.actualizar(this.id, pelicula).subscribe({
-      next: () => this.router.navigate(['/']),
+      next: () => {
+        this.router.navigate(['/'])
+      },
       error: err => {
         this.errores = extraerErrores(err);
       }

@@ -19,16 +19,7 @@
     <input matInput [formControl]="form.controls.trailer" />
   </mat-form-field>
 
-  <app-input-img 
-    *ngIf="modelo"
-    titulo="Poster de la Pelicula" 
-    [urlImagenActual]="modelo.poster" 
-    (archivoSeleccionado)="archivoSeleccionado($event)"
-    style="max-width: 200px; height: auto;">
-  </app-input-img>  
-  <mat-error *ngIf="form.controls.poster.touched && form.controls.poster.errors?.['required']">
-    El poster es obligatorio
-  </mat-error>
+  <app-input-img titulo="Poster de la Pelicula" [urlImagenActual]="modelo?.poster" (archivoSeleccionado)="archivoSeleccionado($event)"></app-input-img>
 
   
   <!-- (seleccionados)="actualizarGenerosSeleccionados($event)" -->
@@ -41,9 +32,8 @@
     {{ obtenerErrorCampoGeneros() }}
   </mat-error> -->
 
-  <h4 *ngIf="mostrarCines">Seleccione los Cines</h4>
-
   @if (mostrarCines) {
+    <h4>Seleccione los Cines</h4>
     <mat-error *ngIf="cineRequeridoError">
       Debe seleccionar al menos un cine si la fecha ya ha pasado.
     </mat-error>
