@@ -177,3 +177,9 @@ C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\Peli
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\NetTopologySuite.dll
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\NetTopologySuite.IO.SqlServerBytes.dll
 C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\obj\Debug\net9.0\EFCoreSqlServerNetTopologySuite.cs
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Usuario\OneDrive\Escritorio\DEV\CURSO .NET + ANGULAR\curso-angular\PeliculasApi\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll

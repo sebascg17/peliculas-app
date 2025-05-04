@@ -1,10 +1,13 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using PeliculasApi;
 using PeliculasApi.Servicios;
 using PeliculasApi.Utilidades;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,39 @@ builder.Services.AddSingleton(proveedor => new MapperConfiguration(configuracion
     configuracion.AddProfile(new AutoMapperProfiles(geometryFactory));
 }).CreateMapper());
 
+builder.Services.AddIdentityCore<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<UserManager<IdentityUser>>();
+builder.Services.AddScoped<SignInManager<IdentityUser>>();
+
+
+builder.Services.AddAuthentication().AddJwtBearer(opciones =>
+{
+    opciones.MapInboundClaims = false;
+
+    opciones.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKeys = new[] // Use an array to match the expected type
+        {
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["llavejwt"]!))
+        },
+        ClockSkew = TimeSpan.Zero // Ensure this property is properly set
+    };
+});
+
+builder.Services.AddAuthorization(opciones =>
+{
+    opciones.AddPolicy("esadmin", politica => politica.RequireClaim("esadmin"));
+    opciones.AddPolicy("EsAdminOPropietario", politica => politica.RequireAssertion(context =>
+        context.User.HasClaim("esAdmin", "true") || context.User.HasClaim("propietario", "true")));
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>(opciones => 
     opciones.UseSqlServer("name=DefaultConnection", sqlServer => 
     sqlServer.UseNetTopologySuite()));
@@ -30,6 +66,7 @@ builder.Services.AddSingleton<GeometryFactory>(NtsGeometryServices.Instance.Crea
 builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosAzure>();
 //builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<IServicioUsuarios, ServicioUsuarios>();
 
 builder.Services.AddOutputCache(opciones =>
 {

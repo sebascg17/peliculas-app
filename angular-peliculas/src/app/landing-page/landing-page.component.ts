@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ListadoPeliculasComponent } from "../peliculas/listado-peliculas/listado-peliculas.component";
 import { PeliculasService } from '../peliculas/peliculas.service';
+import { AutorizadoComponent } from "../seguridad/autorizado/autorizado.component";
 
 @Component({
   selector: 'app-landing-page',

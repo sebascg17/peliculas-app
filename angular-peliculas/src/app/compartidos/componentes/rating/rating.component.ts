@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class RatingComponent implements OnInit {
   ngOnInit() {
-    // this.maximoRatingArreglo = Array(this.maximoRating).fill(0);
+    this.ratingAnterior = this.ratingSeleccionado;
   }
 
   @Input({required: true, transform: (valor: number) => Array(valor).fill(0)}) 
@@ -19,8 +19,8 @@ export class RatingComponent implements OnInit {
   @Input() 
   ratingSeleccionado = 0;
 
- @Output()
- votado = new EventEmitter<number>();
+  @Output()
+  votado = new EventEmitter<number>();
 
   ratingAnterior = 0;
 

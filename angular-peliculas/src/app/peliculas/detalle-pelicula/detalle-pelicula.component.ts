@@ -7,10 +7,14 @@ import { RouterLink } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Coordenada } from '../../compartidos/componentes/mapa/Coordenada';
 import { MapaComponent } from "../../compartidos/componentes/mapa/mapa.component";
+import { RatingService } from '../../rating/rating.service';
+import Swal from 'sweetalert2';
+import { SeguridadService } from '../../seguridad/seguridad.service';
+import { RatingComponent } from "../../compartidos/componentes/rating/rating.component";
 
 @Component({
   selector: 'app-detalle-pelicula',
-  imports: [CargandoComponent, MatChipsModule, RouterLink, MapaComponent],
+  imports: [CargandoComponent, MatChipsModule, RouterLink, MapaComponent, RatingComponent],
   templateUrl: './detalle-pelicula.component.html',
   styleUrl: './detalle-pelicula.component.css'
 })
@@ -20,6 +24,8 @@ export class DetallePeliculaComponent {
   id!: number; // El ID de la película que se va a mostrar en el detalle
 
   peliculasService = inject(PeliculasService); // Servicio para obtener datos de películas
+  ratingService = inject(RatingService); // Servicio para manejar la puntuación de películas
+  seguridadService = inject(SeguridadService)
   pelicula!: PeliculaDTO; // Objeto que contendrá los detalles de la película
   sanitizer = inject(DomSanitizer);
   trailerURL!: SafeResourceUrl; // URL del tráiler de la película
@@ -50,5 +56,17 @@ export class DetallePeliculaComponent {
     }
 
     return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`); // Devolver la URL segura para el iframe
+  }
+
+  puntuar(puntuacion: number) {
+    if (!this.seguridadService.estaLogueado()) {
+      Swal.fire('Error', 'Debes iniciar sesión para puntuar la película', 'error'); // Mostrar un mensaje de error si el usuario no está logueado
+      return;
+      
+    }
+    
+    this.ratingService.puntuar(this.id, puntuacion).subscribe(() => {
+      Swal.fire('Exitoso', 'Gracias por tu puntuación', 'success'); // Mostrar un mensaje de éxito al puntuar la película
+    });
   }
 }
